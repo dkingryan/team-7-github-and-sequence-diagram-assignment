@@ -12,7 +12,7 @@ sequenceDiagram
     participant MoveObj as Move (Move.fromUci / toUci)
 
 
-    // Interactions between host and engine
+    %% Interactions between host and engine
     Host ->> Engine: "uci"
     activate Engine
     Engine ->> Engine: parse "uci"
@@ -28,15 +28,15 @@ sequenceDiagram
     deactivate Engine
 
 
-    // Position
+    %% Position
     Host ->> Engine: "ucinewgame"
     activate Engine
-    Engine ->> Position: Position.startPos()             //reset position to starting
+    Engine ->> Position: Position.startPos()             %% reset position to starting
     Engine -->> Host: (ack no response required)
     deactivate Engine
 
 
-    // Parse
+    %% Parse
     Host ->> Engine: "position startpos moves e2e4 e7e5..."
     activate Engine
     Engine ->> Parser: parse "position..." (detect startpos (or fen))
@@ -50,7 +50,7 @@ sequenceDiagram
     deactivate Engine
 
 
-    // MoveGen
+    %% MoveGen
     Host ->> Engine: "go movetime 10000"
     activate Engine
     Engine ->> Parser: parse "go" options (movetime/wtime/etc.)
@@ -60,7 +60,7 @@ sequenceDiagram
     deactivate MoveGen
 
 
-    // Return moves or handling quit
+    %% Return moves or handling quit
     Engine ->> Engine: choose first move (legalMoves.get(0))
     Engine ->> MoveObj: selectedMove.toUci()
     Engine -->> Host: "bestmove e2e4"
