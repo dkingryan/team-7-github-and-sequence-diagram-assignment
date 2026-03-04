@@ -72,5 +72,20 @@ sequenceDiagram
     Engine -->> Host: (process ends)
     deactivate Engine
 
+    loop for each move token
+    Parser ->> MoveObj: Move.fromUci("e2e4")
+    MoveObj -->> Parser: Move object
+    Parser ->> Position: Position.makeMove(Move)
+    end
+    
+    Engine ->> MoveObj: selectedMove.toUci()
+    MoveObj -->> Engine: "e2e4"
+    Engine -->> Host: "bestmove e2e4"
+    
+    Position ->> Rule: inCheck(position, sideToMove)
+    activate Rule
+    Rule ->> Rule: isSquareAttacked(kingSquare)
+    Rule -->> Position: true / false
+    deactivate Rule
 
 ```
