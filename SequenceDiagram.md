@@ -72,6 +72,8 @@ sequenceDiagram
     Engine -->> Host: (process ends)
     deactivate Engine
 
+
+    %% Ivan changes
     loop for each move token
     Parser ->> MoveObj: Move.fromUci("e2e4")
     MoveObj -->> Parser: Move object
